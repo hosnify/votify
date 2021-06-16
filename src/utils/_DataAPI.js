@@ -203,3 +203,9 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
     }, 500);
   });
 }
+
+export const _getInitialData = async () => {
+  const usersData = await _getUsers();
+  const quetionsData = await _getQuestions();
+  return { usersData, quetionsData };
+};
