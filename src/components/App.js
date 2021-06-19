@@ -1,12 +1,14 @@
 import Header from "./header";
-import Dashboard from "./Dashboard";
 import { connect } from "react-redux";
-
+import routes from "../routes";
 import { useEffect } from "react";
 import { handleInitialData } from "../actions/shared";
 import { Container, createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { useRoutes } from "react-router-dom";
 
-function App({ ...props }) {
+function App({ loggedUser, userAvatar, ...props }) {
+  const routing = useRoutes(routes(loggedUser));
+
   const theme = createMuiTheme({
     spacing: (factor) => `${0.25 * factor}rem`, // (Bootstrap strategy)
   });
@@ -17,16 +19,17 @@ function App({ ...props }) {
   return (
     <ThemeProvider theme={theme}>
       <Container disableGutters>
-        <Header />
-        <Dashboard></Dashboard>
+        <Header loggedUser={loggedUser} userAvatar={userAvatar} />
+        {routing}
       </Container>
     </ThemeProvider>
   );
 }
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ loggedUser, users }) {
   return {
-    loading: authedUser === null,
+    loggedUser,
+    userAvatar: users[loggedUser].avatarURL,
   };
 }
 

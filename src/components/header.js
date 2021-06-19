@@ -3,31 +3,21 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import Avatar from "@material-ui/core/Avatar";
+import { useNavigate } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-  },
-}));
-
-export default function MenuAppBar() {
-  const [loggedUser, setLoggedUser] = useState(null);
+export default function Header({ loggedUser, userAvatar, ...rest }) {
+  const [user, setUser] = useState(loggedUser);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const navigate = useNavigate();
   const open = Boolean(anchorEl);
 
   const handleChange = (event) => {
-    setLoggedUser(event.target.checked);
+    setUser(event.target.checked);
   };
 
   const handleMenu = (event) => {
@@ -39,24 +29,24 @@ export default function MenuAppBar() {
   };
 
   const handleLogOut = () => {
-    setAnchorEl(null);
-    setLoggedUser(null);
+    navigate("/login");
   };
 
   const handleLogIn = () => {
-    setAnchorEl(null);
-    setLoggedUser(true);
+    navigate("/login");
   };
   return (
-    <AppBar position="static" color="transparent">
+    <AppBar position="sticy" color="transparent">
       <Toolbar>
-        <Grid container justify="space-between">
+        <Grid container justify="space-between" alignItems="center">
           <Grid item>
-            <Button>Home</Button>
-            <Button>Leaderboard</Button>
+            <Button onClick={() => navigate("/")}>Home</Button>
+            <Button onClick={() => navigate("/leaderboard")}>
+              Leaderboard
+            </Button>
           </Grid>
           <Grid item>
-            {loggedUser ? (
+            {user ? (
               <div>
                 <IconButton
                   aria-label="account of current user"
@@ -65,7 +55,7 @@ export default function MenuAppBar() {
                   onClick={handleMenu}
                   color="inherit"
                 >
-                  <AccountCircle />
+                  <Avatar src={userAvatar} />
                 </IconButton>
                 <Menu
                   id="menu-appbar"
