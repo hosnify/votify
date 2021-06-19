@@ -19,17 +19,16 @@ function App({ loggedUser, userAvatar, ...props }) {
   return (
     <ThemeProvider theme={theme}>
       <Container disableGutters>
-        <Header loggedUser={loggedUser} userAvatar={userAvatar} />
+        <Header />
         {routing}
       </Container>
     </ThemeProvider>
   );
 }
 
-function mapStateToProps({ loggedUser, users }) {
+function mapStateToProps({ loggedUser }) {
   return {
     loggedUser,
-    userAvatar: users[loggedUser].avatarURL,
   };
 }
 

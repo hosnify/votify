@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -9,13 +9,16 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
 import { useNavigate } from "react-router-dom";
+import { setLoggedUser } from "../actions/auth";
+import { connect } from "react-redux";
 
-export default function Header({ loggedUser, userAvatar, ...rest }) {
+function Header({ loggedUser, userAvatar, dispatch, ...rest }) {
   const [user, setUser] = useState(loggedUser);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const navigate = useNavigate();
   const open = Boolean(anchorEl);
 
+  useEffect(() => setUser(loggedUser));
   const handleChange = (event) => {
     setUser(event.target.checked);
   };
@@ -29,6 +32,7 @@ export default function Header({ loggedUser, userAvatar, ...rest }) {
   };
 
   const handleLogOut = () => {
+    dispatch(setLoggedUser(null));
     navigate("/login");
   };
 
@@ -36,7 +40,7 @@ export default function Header({ loggedUser, userAvatar, ...rest }) {
     navigate("/login");
   };
   return (
-    <AppBar position="sticy" color="transparent">
+    <AppBar position="static" color="transparent">
       <Toolbar>
         <Grid container justify="space-between" alignItems="center">
           <Grid item>
@@ -84,3 +88,11 @@ export default function Header({ loggedUser, userAvatar, ...rest }) {
     </AppBar>
   );
 }
+function mapStateToProps({ loggedUser, users }) {
+  return {
+    loggedUser,
+    userAvatar: loggedUser && users[loggedUser].avatarURL,
+  };
+}
+
+export default connect(mapStateToProps)(Header);
