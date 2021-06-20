@@ -31,7 +31,6 @@ const LoginForm = ({ users, dispatch, ...rest }) => {
 
   const handleLogin = () => {
     dispatch(setLoggedUser(value));
-    navigate("/");
   };
 
   return (
