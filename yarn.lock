@@ -5727,7 +5727,7 @@
   "resolved" "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz"
   "version" "1.1.0"
 
-"history@>=5":
+"history@^5.0.0", "history@>=5":
   "integrity" "sha512-3NyRMKIiFSJmIPdq7FxkNMJkQ7ZEtVblOQ38VtKaA0zZMW1Eo6Q6W8oDKEflr1kNNTItSnk4JMCO1deeSgbLLg=="
   "resolved" "https://registry.npmjs.org/history/-/history-5.0.0.tgz"
   "version" "5.0.0"
@@ -9550,7 +9550,7 @@
     "prop-types" "^15.7.2"
     "react-router" "6.0.0-beta.0"
 
-"react-router@^6.0.0-beta.0", "react-router@6.0.0-beta.0":
+"react-router@6.0.0-beta.0":
   "integrity" "sha512-VgMdfpVcmFQki/LZuLh8E/MNACekDetz4xqft+a6fBZvvJnVqKbLqebF7hyoawGrV1HcO5tVaUang2Og4W2j1Q=="
   "resolved" "https://registry.npmjs.org/react-router/-/react-router-6.0.0-beta.0.tgz"
   "version" "6.0.0-beta.0"
