@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Grid,
   Avatar,
@@ -20,7 +21,8 @@ function Question({ loggedUser, users, question, dispatch, ...rest }) {
   const [answer, setAnswer] = useState(users[loggedUser].answers[question.id]);
 
   const timer = useRef();
-
+  const navigate = useNavigate();
+  const { question_id } = useParams();
   useEffect(() => {
     return () => {
       clearTimeout(timer.current);
@@ -121,9 +123,12 @@ function Question({ loggedUser, users, question, dispatch, ...rest }) {
                     <Progress
                       value={getVotes("optionOne")}
                       total={getVotes("optionOne") + getVotes("optionTwo")}
-                      progress="ratio"
+                      progress="percent"
+                      precision={2}
                       indicating
-                      label="votes"
+                      label={` ${getVotes("optionOne")} of ${
+                        getVotes("optionOne") + getVotes("optionTwo")
+                      } votes `}
                     />
                   </Transition>
                 </Grid>
@@ -136,18 +141,32 @@ function Question({ loggedUser, users, question, dispatch, ...rest }) {
                     <Progress
                       value={getVotes("optionTwo")}
                       total={getVotes("optionOne") + getVotes("optionTwo")}
-                      progress="ratio"
+                      progress="percent"
+                      precision={2}
                       indicating
-                      label="votes"
+                      label={` ${getVotes("optionTwo")} of ${
+                        getVotes("optionOne") + getVotes("optionTwo")
+                      } votes `}
                     />
                   </Transition>
                 </Grid>
               </Grid>
               {!users[loggedUser].answers[question.id] && (
                 <Grid item lg={12} container justify="flex-end">
-                  <Button basic color="green" on onClick={confirmAnswer}>
-                    Confirm Vote & hide
-                  </Button>
+                  {question_id ? (
+                    <Button basic color="green" on onClick={confirmAnswer}>
+                      Confirm Vote
+                    </Button>
+                  ) : (
+                    <Button
+                      basic
+                      color="green"
+                      on
+                      onClick={() => navigate(`/questions/${question.id}`)}
+                    >
+                      Show Question
+                    </Button>
+                  )}
                 </Grid>
               )}
             </Grid>
