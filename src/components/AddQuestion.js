@@ -6,7 +6,6 @@ import { handleAddQuestion } from "../actions/questions";
 function AddQuestion({ trigger, dispatch, ...rest }) {
   const [open, setOpen] = useState(false);
   const [values, setValues] = useState({});
-
   const handleChange = (e, { name, value }) => {
     setValues({ ...values, [name]: value });
   };
@@ -23,7 +22,7 @@ function AddQuestion({ trigger, dispatch, ...rest }) {
       open={open}
       trigger={trigger}
     >
-      <Modal.Header>Add new Question</Modal.Header>
+      <Modal.Header>Would you Rather ?</Modal.Header>
       <Modal.Content>
         <Form className="attached fluid segment">
           <Form.Group widths="equal">
