@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import reducer from "./reducers";
 import middleware from "./middleware";
 import { BrowserRouter } from "react-router-dom";
+import ErrorBoundary from "./components/ErrorBoundry";
 
 const store = createStore(reducer, middleware);
 
@@ -19,7 +20,9 @@ document.head.appendChild(styleLink);
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")

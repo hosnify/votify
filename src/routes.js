@@ -20,10 +20,7 @@ const routes = (user) => {
       path: "/add",
       element: user ? <AddQuestionPage /> : <Login />,
     },
-    {
-      path: "/login",
-      element: <Login />,
-    },
+
     {
       path: "/questions/:question_id",
       element: user ? <QuestionDetails /> : <Login />,
