@@ -33,7 +33,6 @@ function Header({ loggedUser, userAvatar, dispatch, ...rest }) {
 
   const handleLogOut = () => {
     dispatch(setLoggedUser(null));
-    navigate("/login");
   };
 
   const handleLogIn = () => {
@@ -48,6 +47,7 @@ function Header({ loggedUser, userAvatar, dispatch, ...rest }) {
             <Button onClick={() => navigate("/leaderboard")}>
               Leaderboard
             </Button>
+            <Button onClick={() => navigate("/add")}>Add Question</Button>
           </Grid>
           <Grid item>
             {user ? (
