@@ -32,7 +32,7 @@ function UserScore({ users, score, ...rest }) {
       <Grid item lg>
         <Card style={{ minWidth: theme.spacing(150), maxWidth: "fit-content" }}>
           <CardContent>
-            <Typography color="primary" gutterBottom>
+            <Typography component="div" color="primary" gutterBottom>
               {users[score.userId].name} :
             </Typography>
             <Grid container direction="column" justify="center" spacing={5}>
